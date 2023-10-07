@@ -24,5 +24,5 @@ test("Post Validation KO because has no text or media", () => {
     const postValidator = new MastoPostValidator();
     const post = new Post();
     const aErrors = postValidator.validate(post);
-    expect(aErrors.length).toBe(0);
+    expect(aErrors.length).toBe(1);
 });
