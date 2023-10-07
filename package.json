@@ -20,7 +20,7 @@
     "poster"
   ],
   "author": "khyos",
-  "license": "ISC",
+  "license": "MTI",
   "devDependencies": {
     "@babel/core": "^7.23.0",
     "@babel/preset-env": "^7.22.20",
