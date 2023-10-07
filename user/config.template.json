@@ -1,0 +1,10 @@
+{
+    "mastodon": {
+        "url": "",
+        "appToken": ""
+    },
+    "bluesky": {
+        "handle": "",
+        "appPassword": ""
+    }
+}
