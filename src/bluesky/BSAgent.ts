@@ -2,13 +2,15 @@ import { BskyAgent } from "@atproto/api";
 import { AbstractAgent } from "../common/AbstractAgent";
 import { Post } from "../common/Post";
 import { BSPostValidator } from "./BSPostValidator";
+import { BSPostCapabilities } from "./BSPostCapabilities";
 
 export class BSAgent extends AbstractAgent {
     agent: BskyAgent;
 
     constructor() {
         super();
-        this.postValidator = new BSPostValidator();
+        this.postCapabilities = new BSPostCapabilities();
+        this.postValidator = new BSPostValidator(this.postCapabilities);
     }
 
     public async auth(handle: string, appPassword: string) {

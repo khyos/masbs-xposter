@@ -1,13 +1,16 @@
-import { IPostValidator } from "../common/IPostValidator";
+import { AbstractPostValidator } from "../common/AbstractPostValidator";
 import { Post } from "../common/Post";
+import { PostCapabilities } from "../common/PostCapabilities";
 import { ValidationError } from "../common/ValidationError";
 
-export class MastoPostValidator implements IPostValidator {
+export class MastoPostValidator extends AbstractPostValidator {
+
+    constructor(postCapabilities: PostCapabilities) {
+        super(postCapabilities);
+    }
+
     validate(post: Post): ValidationError[] {
-        const validationErrors = [];
-        if (post.text.length === 0 && post.medias.length === 0) {
-            validationErrors.push('Mastodon : Post needs to have at least some text or medias');
-        }
+        const validationErrors = this.postCapabilities.validate(post);
         return validationErrors;
     }
 }

@@ -30,7 +30,7 @@ export class PostOrchestrator {
     public post(post: Post) {
         if (this.shouldAllBeValidBeforePost) {
             for (const agent of this.agents) {
-                if (agent.postValidator.validate(post).length > 0) {
+                if (agent.validate(post).length > 0) {
                     throw new Error('validator KO');
                 }
             }

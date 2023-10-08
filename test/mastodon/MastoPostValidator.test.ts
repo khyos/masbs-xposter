@@ -1,11 +1,13 @@
 import { test, expect } from "@jest/globals";
 
+import { MastoPostCapabilities } from '../../src/mastodon/MastoPostCapabilities';
 import { MastoPostValidator } from '../../src/mastodon/MastoPostValidator';
 import { Post } from "../../src/common/Post";
 import { Media } from "../../src/common/Media";
 
 test("Post Validation OK because has text", () => {
-    const postValidator = new MastoPostValidator();
+    const postCapabilities = new MastoPostCapabilities();
+    const postValidator = new MastoPostValidator(postCapabilities);
     const post = new Post();
     post.text = 'coucou';
     const aErrors = postValidator.validate(post);
@@ -13,7 +15,8 @@ test("Post Validation OK because has text", () => {
 });
 
 test("Post Validation OK because has media", () => {
-    const postValidator = new MastoPostValidator();
+    const postCapabilities = new MastoPostCapabilities();
+    const postValidator = new MastoPostValidator(postCapabilities);
     const post = new Post();
     post.medias.push(new Media());
     const aErrors = postValidator.validate(post);
@@ -21,7 +24,8 @@ test("Post Validation OK because has media", () => {
 });
 
 test("Post Validation KO because has no text or media", () => {
-    const postValidator = new MastoPostValidator();
+    const postCapabilities = new MastoPostCapabilities();
+    const postValidator = new MastoPostValidator(postCapabilities);
     const post = new Post();
     const aErrors = postValidator.validate(post);
     expect(aErrors.length).toBe(1);
