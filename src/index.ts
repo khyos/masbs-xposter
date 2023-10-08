@@ -2,7 +2,7 @@ export * from './bluesky/BSAgent';
 export * from './bluesky/BSPostValidator';
 export * from './bluesky/BSPublishedPost';
 export * from './common/AbstractAgent';
-export * from './common/IPostValidator';
+export * from './common/AbstractPostValidator';
 export * from './common/IPublishedPost';
 export * from './common/Media';
 export * from './common/Poll';
