@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <script src="../../dist/bundle.js"></script>
+    <script>
+        const postOrchestrator = new masbsxposter.PostOrchestrator();
+        function onload() {
+            const form = document.getElementById("form");
+            form.addEventListener("submit", submitForm);
+
+            postOrchestrator.initializeAgents(['bluesky', 'mastodon'], userConfig)
+            fetch('../../user/config.json')
+                .then((response) => response.json())
+                .then((json) => {
+                    postOrchestrator.initializeAgents(['bluesky', 'mastodon'], userConfig)
+                });
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+            const text = document.getElementById("text");
+            const post = new masbsxposter.Post();
+            post.text = text.value;
+            postOrchestrator.post(post);
+        }
+    </script>
+</header>
+
+<body onload="onload()">
+
+    <form id="form">
+        <textarea id="text" placeholder="What are you doing?" onInput=""></textarea>
+        <input type="submit" value="Submit" />
+    </form>
+
+</body>
+
+</html>
