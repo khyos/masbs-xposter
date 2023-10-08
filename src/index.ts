@@ -1,10 +1,17 @@
-import { Post } from './common/Post';
-import { PostOrchestrator } from './common/PostOrchestrator';
-
-new Promise(async () => {
-    const postOrchestrator = new PostOrchestrator();
-    await postOrchestrator.initializeAgents(['bluesky', 'mastodon'])
-    const post = new Post();
-    post.text = 'Hello from api';
-    postOrchestrator.post(post);
-});
+export * from './bluesky/BSAgent';
+export * from './bluesky/BSPostValidator';
+export * from './bluesky/BSPublishedPost';
+export * from './common/AbstractAgent';
+export * from './common/IPostValidator';
+export * from './common/IPublishedPost';
+export * from './common/Media';
+export * from './common/Poll';
+export * from './common/Post';
+export * from './common/PostLanguage';
+export * from './common/PostOrchestrator';
+export * from './common/PostVisibility';
+export * from './common/ReplyInfo';
+export * from './common/ValidationError';
+export * from './mastodon/MastoAgent';
+export * from './mastodon/MastoPostValidator';
+export * from './mastodon/MastoPublishedPost';

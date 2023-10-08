@@ -1,4 +1,3 @@
-import * as fs from 'fs';
 import { BSAgent } from "../bluesky/BSAgent";
 import { MastoAgent } from "../mastodon/MastoAgent";
 import { AbstractAgent } from "./AbstractAgent";
@@ -9,8 +8,7 @@ export class PostOrchestrator {
     rollbackIfOneInError: boolean = true;
     agents: AbstractAgent[] = [];
 
-    public async initializeAgents(agentsIds) {
-        const userConfig = JSON.parse(fs.readFileSync('user/config.json', 'utf8'));
+    public async initializeAgents(agentsIds, userConfig) {
         for (const agentId of agentsIds) {
             switch (agentId) {
                 case 'bluesky':

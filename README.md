@@ -17,4 +17,4 @@
 
 ### Run a sample
 
-* After building run `node ./dist/index.js`
+* After building run `node ./dist/playground/index.js`
