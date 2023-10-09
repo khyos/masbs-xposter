@@ -9,8 +9,12 @@
   ],
   "scripts": {
     "build": "npm run clean && tsc --build --declaration && npm run bundle",
-    "bundle": "webpack",
-    "clean": "npx rimraf dist",
+    "bundle": "npm run bundle:library && npm run bundle:extension",
+    "bundle:library": "webpack --config webpack.config.js",
+    "bundle:extension": "node bundle-extension.js",
+    "clean": "npm run clean:library && npm run clean:extension",
+    "clean:library": "npx rimraf dist",
+    "clean:extension": "npx rimraf dist-extension",
     "postinstall": "node postinstall.js",
     "test": "jest"
   },
@@ -32,6 +36,7 @@
     "@typescript-eslint/parser": "^6.7.4",
     "babel-jest": "^29.7.0",
     "eslint": "^8.51.0",
+    "fs-extra": "^11.1.1",
     "jest": "^29.7.0",
     "rimraf": "^5.0.5",
     "ts-jest": "^29.1.1",
