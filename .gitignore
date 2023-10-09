@@ -1,4 +1,5 @@
 coverage
 dist
+dist-extension
 node_modules
 user/config.json

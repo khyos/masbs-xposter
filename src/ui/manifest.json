@@ -1,0 +1,11 @@
+{
+    "name": "MasBS-XPoster",
+    "version": "0.0.1",
+    "description": "Social Media Cross Poster",
+    "manifest_version": 3,
+    "author": "khyos",
+    "action":{
+        "default_popup": "index.html",
+        "default_title": "MasBS-XPoster"
+    }
+}

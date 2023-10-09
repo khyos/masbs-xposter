@@ -21,6 +21,12 @@
 
 ### Use html interface
 
-* After building open `src/ui/index.html` in the browser
+* After building open `dist-extension/index.html` in the browser
 * Input your Mastodon & BlueSky Settings and click on Update Settings
 * Now compose your message and click on submit (Mastodon send a 422 error for now)
+
+### Use Chrome extension
+
+* After building load the folder `dist-extension` as an unpacked chrome extension
+* Input your Mastodon & BlueSky Settings and click on Update Settings
+* Now compose your message and click on submit
