@@ -8,12 +8,20 @@
             const form = document.getElementById("form");
             form.addEventListener("submit", submitForm);
 
-            postOrchestrator.initializeAgents(['bluesky', 'mastodon'], userConfig)
-            fetch('../../user/config.json')
-                .then((response) => response.json())
-                .then((json) => {
-                    postOrchestrator.initializeAgents(['bluesky', 'mastodon'], userConfig)
-                });
+            initSettings();
+        }
+
+        function initSettings() {
+            const mastodonInstanceURLInput = document.getElementById("mastodonInstanceURL");
+            mastodonInstanceURLInput.value = localStorage.getItem("mastodonInstanceURL");
+            const mastodonAppTokenInput = document.getElementById("mastodonAppToken");
+            mastodonAppTokenInput.value = localStorage.getItem("mastodonAppToken");
+            const bsIdentifierInput = document.getElementById("bsIdentifier");
+            bsIdentifierInput.value = localStorage.getItem("bsIdentifier");
+            const bsAppPasswordInput = document.getElementById("bsAppPassword");
+            bsAppPasswordInput.value = localStorage.getItem("bsAppPassword");
+
+            initializeAgents();
         }
 
         function submitForm(event) {
@@ -23,16 +31,57 @@
             post.text = text.value;
             postOrchestrator.post(post);
         }
+
+        function updateSettings() {
+            localStorage.setItem("mastodonInstanceURL", document.getElementById("mastodonInstanceURL").value);
+            localStorage.setItem("mastodonAppToken", document.getElementById("mastodonAppToken").value);
+            localStorage.setItem("bsIdentifier", document.getElementById("bsIdentifier").value);
+            localStorage.setItem("bsAppPassword", document.getElementById("bsAppPassword").value);
+
+            initializeAgents();
+        }
+
+        function initializeAgents() {
+            const userConfig = {
+                "mastodon": {
+                    "url": localStorage.getItem("mastodonInstanceURL"),
+                    "appToken": localStorage.getItem("mastodonAppToken")
+                },
+                "bluesky": {
+                    "handle": localStorage.getItem("bsIdentifier"),
+                    "appPassword": localStorage.getItem("bsAppPassword")
+                }
+            }
+
+            postOrchestrator.initializeAgents(['bluesky', 'mastodon'], userConfig);
+        }
     </script>
 </header>
 
 <body onload="onload()">
 
-    <form id="form">
-        <textarea id="text" placeholder="What are you doing?" onInput=""></textarea>
-        <input type="submit" value="Submit" />
-    </form>
-
+    <div>
+        <h2>Mastodon Settings</h2>
+        <label for="mastodonInstanceURL">Instance URL</label>
+        <input id="mastodonInstanceURL" type="text" />
+        <label for="mastodonAppToken">Mastodon App Token</label>
+        <input id="mastodonAppToken" type="password" />
+    </div>
+    <div>
+        <h2>BlueSky Settings</h2>
+        <label for="bsIdentifier">Id</label>
+        <input id="bsIdentifier" type="text" />
+        <label for="bsAppPassword">BlueSky App Password</label>
+        <input id="bsAppPassword" type="password" />
+    </div>
+    <button onclick="updateSettings()">Update Settings</button>
+    <div>
+        <h2>Compose</h2>
+        <form id="form">
+            <textarea id="text" placeholder="What are you doing?" onInput=""></textarea>
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
 </body>
 
 </html>

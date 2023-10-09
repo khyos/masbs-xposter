@@ -18,3 +18,9 @@
 ### Run a sample
 
 * After building run `node ./dist/playground/index.js`
+
+### Use html interface
+
+* After building open `src/ui/index.html` in the browser
+* Input your Mastodon & BlueSky Settings and click on Update Settings
+* Now compose your message and click on submit (Mastodon send a 422 error for now)
