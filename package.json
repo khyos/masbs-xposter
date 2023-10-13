@@ -1,11 +1,12 @@
 {
   "name": "masbs-xposter",
-  "version": "0.0.1",
+  "version": "0.0.6",
   "description": "A Mastodon, BlueSky cross poster",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "/dist"
+    "/dist",
+    "postinstall.js"
   ],
   "scripts": {
     "build": "npm run clean && tsc --build --declaration && npm run bundle",
