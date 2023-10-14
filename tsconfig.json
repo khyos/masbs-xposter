@@ -1,9 +1,14 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
-        "target": "esnext",
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
+        "target": "ESNext",
+        "outDir": "./dist",
         "declaration": true,
-        "outDir": "./dist"
+        "sourceMap": true,
+        "typeRoots": [
+            "node_modules/@types"
+        ]
     },
     "include": [
         "src/**/*",

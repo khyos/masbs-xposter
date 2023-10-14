@@ -1,7 +1,8 @@
 {
   "name": "masbs-xposter",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A Mastodon, BlueSky cross poster",
+  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [

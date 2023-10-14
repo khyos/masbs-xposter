@@ -1,6 +1,10 @@
-var fs = require('fs');
-var fsExtra = require('fs-extra');
-var path = require('path');
+import fs from 'fs';
+import fsExtra from 'fs-extra';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 var srcUIDir = path.join(__dirname, "./src/ui");
 var destDir = path.join(__dirname, "./dist-extension");

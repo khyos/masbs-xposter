@@ -1,10 +1,12 @@
-const path = require('path');
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
     entry: './src/index.ts',
     output: {
-        library: 'masbsxposter',
-        libraryTarget: 'umd',
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
     },

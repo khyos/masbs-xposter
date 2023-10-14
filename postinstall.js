@@ -1,4 +1,4 @@
-const fs = require('fs')
+import fs from 'fs';
 
 // Due to template compilation error in multiformats we are editing multiformats/types/src/cid.d.ts so that the build works
 const pathToCid = 'node_modules/multiformats/types/src/cid.d.ts';
