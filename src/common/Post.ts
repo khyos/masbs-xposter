@@ -7,8 +7,8 @@ import { ReplyInfo } from "./ReplyInfo";
 export class Post {
     language: PostLanguage;
     medias: Media[] = [];
-    poll: Poll;
-    replyTo: ReplyInfo;
+    poll: Poll | null;
+    replyTo: ReplyInfo | null;
     sensitive: boolean;
     sensitiveText: string;
     text: string = '';
