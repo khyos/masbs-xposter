@@ -5,14 +5,17 @@ import { MastoPostValidator } from "./MastoPostValidator";
 import { MastoPostCapabilities } from "./MastoPostCapabilities";
 
 export class MastoAgent extends AbstractAgent {
+    static ID: string = 'mastodon';
+
     agent;
 
     constructor() {
         super();
+        this.id = MastoAgent.ID;
         this.postCapabilities = new MastoPostCapabilities();
         this.postValidator = new MastoPostValidator(this.postCapabilities);
     }
-
+    
     public async auth(url: string, appToken: string) {
         this.agent = createRestAPIClient({
             url: url,
@@ -22,9 +25,24 @@ export class MastoAgent extends AbstractAgent {
 
     public async post(post: Post) {
         this.beforePost(post);
-        await this.agent.v1.statuses.create({
-            status: post.text,
-            visibility: "public"
-        });
+
+        const mastoPostModel: any = {
+            visibility: 'public'
+        };
+        if (post.text) {
+            mastoPostModel.status = post.text
+        }
+        for (const media of post.medias) {
+            const uploadedBlob = await this.agent.v2.media.create({
+                file: media.file
+            });
+            
+            if (!mastoPostModel.mediaIds) {
+                mastoPostModel.mediaIds = [];
+            }
+            mastoPostModel.mediaIds.push(uploadedBlob.id);
+        }
+
+        await this.agent.v1.statuses.create(mastoPostModel);
     }
 }

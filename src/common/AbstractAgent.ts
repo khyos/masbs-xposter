@@ -4,7 +4,9 @@ import { PostCapabilities } from "./PostCapabilities";
 import { ValidationError } from "./ValidationError";
 
 export abstract class AbstractAgent {
+    activated: boolean = true;
     connected: boolean = false;
+    id: string;
     postValidator: AbstractPostValidator;
     postCapabilities: PostCapabilities;
 
