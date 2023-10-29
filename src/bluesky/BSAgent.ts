@@ -3,17 +3,28 @@ import { AbstractAgent } from "../common/AbstractAgent";
 import { Post } from "../common/Post";
 import { BSPostValidator } from "./BSPostValidator";
 import { BSPostCapabilities } from "./BSPostCapabilities";
+import { BskyAgentConfiguration } from "./BskyAgentConfiguration";
+import { AbstractAgentConfiguration } from "../common/AbstractAgentConfiguration";
 
 export class BSAgent extends AbstractAgent {
-    static ID: string = 'BSAgent';
-
     agent: BskyAgent;
 
     constructor() {
         super();
-        this.id = BSAgent.ID;
+        this.id = BskyAgentConfiguration.ID;
         this.postCapabilities = new BSPostCapabilities();
         this.postValidator = new BSPostValidator(this.postCapabilities);
+    }
+
+    public async initialize(agentConfiguration: AbstractAgentConfiguration): Promise<void> {
+        if (agentConfiguration instanceof BskyAgentConfiguration) {
+            await this.auth(agentConfiguration.handle, agentConfiguration.appPassword);
+            if (agentConfiguration.activated != null) {
+                this.activated = agentConfiguration.activated;
+            }
+        } else {
+            throw Error('BskyAgent: Incompatible Configuration');
+        }
     }
 
     public async auth(handle: string, appPassword: string) {

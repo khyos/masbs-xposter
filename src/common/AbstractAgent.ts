@@ -1,3 +1,4 @@
+import { AbstractAgentConfiguration } from "./AbstractAgentConfiguration";
 import { AbstractPostValidator } from "./AbstractPostValidator";
 import { Post } from "./Post";
 import { PostCapabilities } from "./PostCapabilities";
@@ -9,6 +10,8 @@ export abstract class AbstractAgent {
     id: string;
     postValidator: AbstractPostValidator;
     postCapabilities: PostCapabilities;
+
+    public abstract initialize(agentConfiguration: AbstractAgentConfiguration): Promise<void>;
 
     public abstract post(post: Post): Promise<void>;
 

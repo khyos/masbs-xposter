@@ -1,7 +1,7 @@
-import { ValidationError } from "..";
-import { BSAgent } from "../bluesky/BSAgent";
-import { MastoAgent } from "../mastodon/MastoAgent";
+import { ValidationError } from "./ValidationError";
 import { AbstractAgent } from "./AbstractAgent";
+import { AbstractAgentConfiguration } from "./AbstractAgentConfiguration";
+import AgentDeclaration from "./AgentDeclaration";
 import { Post } from "./Post";
 
 export class PostOrchestrator {
@@ -9,23 +9,12 @@ export class PostOrchestrator {
     rollbackIfOneInError: boolean = true;
     agents: AbstractAgent[] = [];
 
-    public async initializeAgents(agentsIds, userConfig) {
+    public async initializeAgents(agentConfigurations: AbstractAgentConfiguration[]) {
         this.agents = [];
-        for (const agentId of agentsIds) {
-            switch (agentId) {
-                case BSAgent.ID:
-                    const bsAgent = new BSAgent();
-                    await bsAgent.auth(userConfig.bluesky.handle, userConfig.bluesky.appPassword);
-                    this.agents.push(bsAgent);
-                    break;
-                case MastoAgent.ID:
-                    const mastoAgent = new MastoAgent();
-                    await mastoAgent.auth(userConfig.mastodon.url, userConfig.mastodon.appToken);
-                    this.agents.push(mastoAgent);
-                    break;
-                default:
-                    break;
-            }
+        for (const agentConfiguration of agentConfigurations) {
+            const agent = new AgentDeclaration[agentConfiguration.id]();
+            agent.initialize(agentConfiguration);
+            this.agents.push(agent);
         }
     }
 

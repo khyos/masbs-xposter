@@ -1,4 +1,5 @@
 export * from './bluesky/BSAgent';
+export * from './bluesky/BskyAgentConfiguration';
 export * from './bluesky/BSPostValidator';
 export * from './bluesky/BSPublishedPost';
 export * from './common/AbstractAgent';
@@ -13,5 +14,6 @@ export * from './common/PostVisibility';
 export * from './common/ReplyInfo';
 export * from './common/ValidationError';
 export * from './mastodon/MastoAgent';
+export * from './mastodon/MastoAgentConfiguration';
 export * from './mastodon/MastoPostValidator';
 export * from './mastodon/MastoPublishedPost';
