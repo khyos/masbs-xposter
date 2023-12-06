@@ -43,7 +43,7 @@ export class PostOrchestrator {
         return !!Object.values(validationErrors).find((it: ValidationError[]) => it.length > 0);
     }
 
-    public post(post: Post) : void {
+    public post(post: Post) : Promise<void> {
         const activatedAgents = this.getActivatedAgents();
         const validationErrors = this.validatePost(post);
 
@@ -59,7 +59,7 @@ export class PostOrchestrator {
         for (const agent of activatedAgents) {
             postPromises.push(agent.post(post));
         }
-        Promise.all(postPromises).then(() => {
+        return Promise.all(postPromises).then(() => {
 
         }).catch(() => {
             if (this.rollbackIfOneInError) {
