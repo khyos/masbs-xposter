@@ -1,4 +1,4 @@
-import { BskyAgent } from "@atproto/api";
+import { BskyAgent, RichText } from "@atproto/api";
 import { AbstractAgent } from "../common/AbstractAgent";
 import { Post } from "../common/Post";
 import { BSPostValidator } from "./BSPostValidator";
@@ -40,7 +40,12 @@ export class BSAgent extends AbstractAgent {
 
         const bskyPostModel: any = {};
         if (post.text) {
-            bskyPostModel.text = post.text
+            const richText = new RichText({
+                text: post.text,
+            })
+            await richText.detectFacets(this.agent);
+            bskyPostModel.text = richText.text
+            bskyPostModel.facets = richText.facets
         }
         for (const media of post.medias) {
             const blob : any = await media.fileAsUint8Array();
