@@ -23,6 +23,8 @@ export class PostCapabilities {
     sensitiveTextMaxLength: number; // Maximum length of the sensitive text (in characters, 0 for no support)
     // Text
     textMaxLength: number; // The max length of the post
+    // URL Embed
+    urlEmbedSupport: boolean;
     // Visibility
     visibiltyOptions: PostVisibility[]; // The list of supported post visibilities
 

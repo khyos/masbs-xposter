@@ -47,6 +47,21 @@ export class BSAgent extends AbstractAgent {
             bskyPostModel.text = richText.text
             bskyPostModel.facets = richText.facets
         }
+        if (post.urlEmbed) {
+            const blob : any = await post.urlEmbed.fileAsUint8Array();
+            const uploadedBlob = await this.agent.uploadBlob(blob, {
+                encoding: post.urlEmbed.encoding
+            });
+            bskyPostModel.embed = {
+                '$type': 'app.bsky.embed.external',
+                'external': {
+                    'url': post.urlEmbed.url,
+                    'title': post.urlEmbed.title,
+                    'description': post.urlEmbed.description,
+                    'thumb': uploadedBlob.data.blob,
+                }
+            }
+        }
         for (const media of post.medias) {
             const blob : any = await media.fileAsUint8Array();
             const uploadedBlob = await this.agent.uploadBlob(blob, {

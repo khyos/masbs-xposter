@@ -18,6 +18,7 @@ export class BSPostCapabilities extends PostCapabilities {
         this.sensitiveSupport = false;
         this.sensitiveTextMaxLength = 0;
         this.textMaxLength = 300;
+        this.urlEmbedSupport = true;
         this.visibiltyOptions = [PostVisibility.PUBLIC]
     }
 }

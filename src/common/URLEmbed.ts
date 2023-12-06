@@ -1,8 +1,29 @@
-export class Media {
-    altText: string;
+import { FetchUtil } from "../util/FetchUtil";
+
+export class URLEmbed {
     binaryFile: Uint8Array;
+    description: string;
     encoding: string;
     file: File;
+    title: string;
+    url: string;
+
+    public async createFromURL(url: string) {
+        const ogData = await FetchUtil.fetchOGData(url);
+        const response = await fetch(url);
+        if (ogData && (ogData.title || ogData.imageUrl)) {
+            const urlEmbed = new URLEmbed();
+            urlEmbed.url = url;
+            urlEmbed.title = ogData.title;
+            urlEmbed.description = ogData.description;
+            if (ogData.imageUrl) {
+                urlEmbed.file = await FetchUtil.fetchImg(ogData.imageUrl)
+            }
+            return urlEmbed;
+        } else {
+            return null;
+        }
+    }
 
     public async fileAsUint8Array() {
         return new Promise((resolve, reject) => {
@@ -28,6 +49,5 @@ export class Media {
                 fileReader.readAsDataURL(this.file);
             }
         })
-        
     }
 }

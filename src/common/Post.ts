@@ -3,6 +3,7 @@ import { Poll } from "./Poll";
 import { PostLanguage } from "./PostLanguage";
 import { PostVisibility } from "./PostVisibility";
 import { ReplyInfo } from "./ReplyInfo";
+import { URLEmbed } from "./URLEmbed";
 
 export class Post {
     language: PostLanguage;
@@ -12,5 +13,6 @@ export class Post {
     sensitive: boolean;
     sensitiveText: string;
     text: string = '';
+    urlEmbed: URLEmbed | null;
     visibility: PostVisibility;
 }

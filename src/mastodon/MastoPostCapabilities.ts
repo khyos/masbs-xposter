@@ -18,6 +18,7 @@ export class MastoPostCapabilities extends PostCapabilities {
         this.sensitiveSupport = true;
         this.sensitiveTextMaxLength = Number.MAX_VALUE; // TODO find the right number, whether it is instance related or not
         this.textMaxLength = Number.MAX_VALUE; // TODO find the right number, whether it is instance related or not;
+        this.urlEmbedSupport = false;
         this.visibiltyOptions = [PostVisibility.PUBLIC, PostVisibility.UNLISTED, PostVisibility.FOLLOWERS_ONLY, PostVisibility.DIRECT]
     }
 }
