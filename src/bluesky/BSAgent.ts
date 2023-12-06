@@ -28,7 +28,7 @@ export class BSAgent extends AbstractAgent {
     }
 
     public async auth(handle: string, appPassword: string) {
-        this.agent = new BskyAgent({ service: "https://bsky.social" });
+        this.agent = new BskyAgent({ service: 'https://bsky.social' });
         await this.agent.login({
             identifier: handle,
             password: appPassword,
